@@ -1,8 +1,8 @@
 {
     "test_user_123": {
         "learning_style": "step_by_step",
-        "presentation_style": "shakespeare",
-        "knowledge_level": "intermediate",
+        "presentation_style": "hawking",
+        "knowledge_level": "advanced",
         "interaction_style": "tutor",
         "problem_solving": "guided",
         "personality_style": "casual",
@@ -26,15 +26,6 @@
         "expectancy_value": {
             "expectancy": "high",
             "value": "high"
-        },
-        "last_used": "2025-03-13T02:00:00Z"
-    },
-    "another_user_456": {
-        "learning_style": "default",
-        "last_used": "2025-03-13T02:00:00Z"
-    },
-    "default_user": {
-        "learning_style": "default",
-        "last_used": "2025-03-13T02:00:00Z"
+        }
     }
 }
