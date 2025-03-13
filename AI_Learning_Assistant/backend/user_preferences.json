@@ -1,6 +1,32 @@
 {
     "test_user_123": {
-        "learning_style": "default",
+        "learning_style": "visual",
+        "presentation_style": "einstein",
+        "knowledge_level": "intermediate",
+        "interaction_style": "tutor",
+        "problem_solving": "guided",
+        "personality_style": "humorous",
+        "preferred_subjects": [
+            "physics",
+            "math"
+        ],
+        "explanation_length": "detailed",
+        "learning_speed": "medium",
+        "role_model": "curie",
+        "struggled_with": [],
+        "goal_orientation": "mastery-approach",
+        "self_efficacy": "medium",
+        "motivation_type": "intrinsic",
+        "personality_traits": [
+            "openness",
+            "conscientiousness"
+        ],
+        "feedback_preference": "immediate",
+        "social_learning_preference": "individual",
+        "expectancy_value": {
+            "expectancy": "high",
+            "value": "high"
+        },
         "last_used": "2025-03-13T02:00:00Z"
     },
     "another_user_456": {

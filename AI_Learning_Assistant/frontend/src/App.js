@@ -1,13 +1,16 @@
-import React from "react";
-import Chat from "./Chat";  // Ensure this file exists and is named correctly
+import React, { useState } from "react";
+import Chat from "./components/Chat";
+import Settings from "./components/Settings";
 
-function App() {
+export default function App() {
+    const [userId] = useState("test_user_123");  // Example user ID
+    const [preferences, setPreferences] = useState({});  // Store user settings
+
     return (
-        <div>
-            <h1>AI Learning Assistant</h1>
-            <Chat />
+        <div className="app">
+            <h1>🚀 AI Learning Assistant</h1>
+            <Settings userId={userId} onPreferenceChange={setPreferences} />
+            <Chat userId={userId} preferences={preferences} />
         </div>
     );
 }
-
-export default App;
