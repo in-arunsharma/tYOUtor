@@ -1,9 +1,9 @@
 {
     "test_user_123": {
         "learning_style": "step_by_step",
-        "presentation_style": "shakespeare",
+        "presentation_style": "einstein",
         "knowledge_level": "intermediate",
-        "interaction_style": "tutor",
+        "interaction_style": "direct",
         "problem_solving": "guided",
         "personality_style": "casual",
         "preferred_subjects": [
@@ -12,7 +12,7 @@
         ],
         "explanation_length": "detailed",
         "learning_speed": "medium",
-        "role_model": "da_vinci",
+        "role_model": "feynman",
         "struggled_with": [],
         "goal_orientation": "mastery-approach",
         "self_efficacy": "medium",

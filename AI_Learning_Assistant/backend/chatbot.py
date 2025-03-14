@@ -478,6 +478,9 @@ def get_ai_response(user_id, question, course_mode="eciu"):
             - If the user prefers guided hints, provide a thought-provoking statement before explaining outright.
             - Maintain the conversational tone of the chosen role model (e.g., if Einstein, use analogies and thought experiments).
             - Avoid being robotic—make it feel like an engaging discussion.
+            - Keep the summary concise but engaging.
+            - Ensure the transition between explanation and course listing is smooth—avoid abrupt changes like "Here are some courses:"
+            - DO NOT use bullet points.
 
             Generate a response below:
             """
@@ -506,7 +509,7 @@ def get_ai_response(user_id, question, course_mode="eciu"):
                 - For Guided Hints, introduce hints first before revealing full course details.
                 - Relate it to the user’s subject interests and learning style.
                 - Avoid repetition—each course should feel uniquely valuable.
-                -If no relevant courses exist, suggest alternative strategies (such as searching within ECIU partner universities or recommending similar global courses).
+                - If no relevant courses exist, suggest alternative strategies (such as searching within ECIU partner universities or recommending similar global courses).
                 - DO NOT use bullet points.
 
                 Generate the response below:
@@ -531,7 +534,7 @@ def get_ai_response(user_id, question, course_mode="eciu"):
 
     # **Step 2: If Global Mode, Generate AI Response**
     full_prompt = f"""
-    You are an AI Learning Mentor with an engaging and adaptive personality.
+    You are an AI Learning Mentor with an engaging and adaptive personality and personalized recomendations.
 
     The user is asking: "{question}"
 
@@ -547,19 +550,18 @@ def get_ai_response(user_id, question, course_mode="eciu"):
     {knowledge_reference}
 
     **Instructions for AI:**
-    - Write responses as if speaking naturally to the user. The text should feel engaging, fluid, and NOT robotic or overly structured.
-    - Avoid bullet points, numbered lists, or rigid formatting. Instead, structure responses like a conversation, flowing naturally from one idea to the next.
-    - Use contractions, relatable examples, and a friendly, interactive tone to make learning enjoyable
-    - If the user has previously learned about this topic, build on their existing knowledge instead of repeating known concepts.
-    - If Socratic mode is selected, ask thought-provoking questions instead of direct answers.
-    - For Guided Hints, provide a hint first before revealing the full explanation.
-    - Ensure responses match the user’s personality settings.
-    - Keep responses concise but engaging—not too long or overwhelming, but also not overly simplistic.
-    - Build on prior knowledge instead of repeating known concepts.
-    - If Socratic mode is selected, ask thought-provoking questions instead of direct answers.
-    - For Guided Hints, provide a hint first before revealing the full explanation.
-    - Avoid bullet points. Structure responses naturally, like a conversation.
-    - Responses should flow in a way that feels engaging, not robotic.
+    - **Write responses as if speaking naturally** to the user. The text should feel **engaging, fluid, and conversational**—NOT robotic or overly structured.
+    - **DO NOT use bullet points, lists, or rigid formatting.** Structure responses like an engaging discussion where ideas flow naturally.
+    - **If the user asks for course recommendations, ALWAYS provide specific course names and summaries.** Do NOT just talk about learning methods—include real courses.
+    - **Ensure course recommendations feel personal** by explaining why they are relevant based on the user’s background, interests, and learning preferences.
+    - **Build on the user’s prior knowledge** if they have previously learned about this topic. Do not repeat what they already know.
+    - **If Socratic mode is selected, do NOT give direct answers.** Instead, keep guiding the user with thought-provoking questions until they arrive at an answer.
+    - **For Guided Hints, provide a hint first before revealing the full explanation.** Make it interactive like a real tutor.
+    - **Use contractions, relatable examples, and an interactive tone** to make the response feel warm, engaging, and enjoyable to read.
+    - **Make responses concise but rich.** Avoid overly long, exhausting paragraphs—keep explanations clear, dynamic, and engaging.
+    - **Ensure the personality style is reflected in the response.** If the user selected “Humorous,” make it witty. If they prefer “Formal,” keep it structured.
+    - **If the user asks about a course but no direct match is found, suggest closely related alternatives.** Do NOT leave them without a suggestion.
+    - **Avoid repetitive or filler phrases.** Keep responses fresh, insightful, and to the point.
 
     Generate the response below:
     """
@@ -590,10 +592,25 @@ def get_ai_response(user_id, question, course_mode="eciu"):
 
 # AI function to generate course explanations
 def get_ai_summary(prompt):
-    """ Generate a short AI-generated summary. """
+    """ Generate a short, engaging AI-generated course summary. """
+
+    # 🔹 Fine-tuned AI Instructions
+    refined_prompt = f"""
+    You are an AI tutor recommending a course. **Keep the summary short (3-4 sentences max), engaging, and conversational**. 
+
+    **Instructions:**
+    - Explain why this course is interesting, **without making it sound like a formal description.**
+    - If possible, **relate it to the user’s learning style and interests.**
+    - **Avoid overly technical jargon**—make it **relatable and easy to understand.**
+    - **Use a human tone** (as if a passionate mentor were recommending the course).
+    - **DO NOT list details like course length, syllabus, or requirements**—just highlight why it’s exciting!
+    
+    **Now, summarize this course in a natural, engaging way:**
+    {prompt}
+    """
 
     headers = {"Content-Type": "application/json"}
-    data = {"contents": [{"parts": [{"text": prompt}]}]}
+    data = {"contents": [{"parts": [{"text": refined_prompt}]}]}
 
     try:
         response = requests.post(GEMINI_URL, headers=headers, json=data)
