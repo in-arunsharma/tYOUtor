@@ -294,7 +294,7 @@ def clear_conversation_history():
 AI_MODE = os.getenv("AI_MODE", "api")
 
 # Google Gemini API Config
-GEMINI_API_KEY = "AIzaSyChup4-1Oy98eweQ_V1tKj2daB8YxeCFzE"
+GEMINI_API_KEY = "AIzaSyBzNR9eZqqGP-jELPxtLVcJRwnT7PSlsH4"
 GEMINI_MODEL = "gemini-2.0-flash"
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
 
@@ -600,6 +600,7 @@ def get_ai_summary(prompt):
 
     **Instructions:**
     - Explain why this course is interesting, **without making it sound like a formal description.**
+    - *do not start like "Hey there ..." just jump to the point*
     - If possible, **relate it to the user’s learning style and interests.**
     - **Avoid overly technical jargon**—make it **relatable and easy to understand.**
     - **Use a human tone** (as if a passionate mentor were recommending the course).

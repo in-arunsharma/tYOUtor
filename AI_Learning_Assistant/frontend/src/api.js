@@ -1,14 +1,13 @@
-export async function askAI(question) {
+export async function askAI(userId, question, courseMode) {
     const response = await fetch("http://127.0.0.1:5000/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({question })
+        body: JSON.stringify({ user_id: userId, question, course_mode: courseMode })
     });
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch AI response");
+    if (response.ok) {
+        return await response.json();
+    } else {
+        return "❌ Error fetching AI response.";
     }
-
-    const data = await response.json();
-    return data.answer;
 }

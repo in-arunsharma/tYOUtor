@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function Settings({ userId, onPreferenceChange }) {
     const [preferences, setPreferences] = useState({
         learning_style: "step_by_step",
-        presentation_style: "einstein",
+        presentation_style: "standard",
         knowledge_level: "intermediate",
         interaction_style: "tutor",
         problem_solving: "guided",
@@ -50,11 +50,13 @@ export default function Settings({ userId, onPreferenceChange }) {
 
             <label>🧑‍🏫 Presentation Style:</label>
             <select name="presentation_style" value={preferences.presentation_style} onChange={handleChange}>
+                <option value="standard">Standard</option>
                 <option value="einstein">Einstein</option>
                 <option value="curie">Curie</option>
                 <option value="feynman">Feynman</option>
                 <option value="hawking">Hawking</option>
                 <option value="shakespeare">Shakespeare</option>
+                
             </select>
 
             <label>📚 Knowledge Level:</label>
