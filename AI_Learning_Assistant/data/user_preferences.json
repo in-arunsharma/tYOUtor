@@ -1,0 +1,31 @@
+{
+    "test_user_123": {
+        "learning_style": "step_by_step",
+        "presentation_style": "shakespeare",
+        "knowledge_level": "intermediate",
+        "interaction_style": "tutor",
+        "problem_solving": "guided",
+        "personality_style": "casual",
+        "preferred_subjects": [
+            "physics",
+            "math"
+        ],
+        "explanation_length": "detailed",
+        "learning_speed": "medium",
+        "role_model": "da_vinci",
+        "struggled_with": [],
+        "goal_orientation": "mastery-approach",
+        "self_efficacy": "medium",
+        "motivation_type": "intrinsic",
+        "personality_traits": [
+            "openness",
+            "conscientiousness"
+        ],
+        "feedback_preference": "immediate",
+        "social_learning_preference": "individual",
+        "expectancy_value": {
+            "expectancy": "high",
+            "value": "high"
+        }
+    }
+}
