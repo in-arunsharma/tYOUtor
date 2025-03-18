@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../chat.css";
 
 export default function Chat({ userId }) {
     const [question, setQuestion] = useState("");

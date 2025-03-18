@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import "../settings.css";
+
+
 export default function Settings({ userId, onPreferenceChange }) {
     const [preferences, setPreferences] = useState({
         learning_style: "step_by_step",

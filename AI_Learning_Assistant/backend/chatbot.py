@@ -294,7 +294,7 @@ def clear_conversation_history():
 AI_MODE = os.getenv("AI_MODE", "api")
 
 # Google Gemini API Config
-GEMINI_API_KEY = "AIzaSyBzNR9eZqqGP-jELPxtLVcJRwnT7PSlsH4"
+GEMINI_API_KEY = "AIzaSyAZEFbcHvg4EuDSom-H_s_aCGTkWdhQajA"
 GEMINI_MODEL = "gemini-2.0-flash"
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
 

@@ -1,18 +1,18 @@
 {
     "test_user_123": {
         "learning_style": "step_by_step",
-        "presentation_style": "standard",
-        "knowledge_level": "intermediate",
+        "presentation_style": "einstein",
+        "knowledge_level": "beginner",
         "interaction_style": "tutor",
-        "problem_solving": "guided",
-        "personality_style": "casual",
+        "problem_solving": "direct",
+        "personality_style": "formal",
         "preferred_subjects": [
             "physics",
             "math"
         ],
         "explanation_length": "detailed",
         "learning_speed": "medium",
-        "role_model": "feynman",
+        "role_model": "hawking",
         "struggled_with": [],
         "goal_orientation": "mastery-approach",
         "self_efficacy": "medium",
