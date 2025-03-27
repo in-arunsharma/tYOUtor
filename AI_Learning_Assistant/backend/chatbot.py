@@ -10,8 +10,9 @@ import random
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-DATA_DIR = "../data/"
-
+# Define base directory relative to this file
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 # **File Paths**
 COURSE_CSV_FILE = os.path.join(DATA_DIR, "course_database.csv")
@@ -294,7 +295,7 @@ def clear_conversation_history():
 AI_MODE = os.getenv("AI_MODE", "api")
 
 # Google Gemini API Config
-GEMINI_API_KEY = "AIzaSyAZEFbcHvg4EuDSom-H_s_aCGTkWdhQajA"
+GEMINI_API_KEY = "AIzaSyBzNR9eZqqGP-jELPxtLVcJRwnT7PSlsH4"
 GEMINI_MODEL = "gemini-2.0-flash"
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
 
