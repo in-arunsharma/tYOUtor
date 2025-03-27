@@ -1,14 +1,24 @@
-import React, { useState } from "react";
-import "../chat.css";
+import React, { useState, useEffect, useRef } from 'react';
+import { askAI } from '../api';
+import './Chat.css';
 
 export default function Chat({ userId }) {
     const [question, setQuestion] = useState("");
     const [conversation, setConversation] = useState([]);  
     const [courseMode, setCourseMode] = useState("eciu");
+    const chatContainerRef = useRef(null);
+
+    // Auto-scroll to bottom of chat when conversation updates
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [conversation]);
 
     const askAI = async () => {
         if (!question.trim()) return;
 
+        // Add user question to conversation with highlighted styling
         setConversation(prev => [...prev, { role: "user", text: question }]);
 
         const res = await fetch("http://127.0.0.1:5000/ask", {
@@ -24,7 +34,7 @@ export default function Chat({ userId }) {
 
         const formattedResponse = aiResponse
             .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")  
-            .replace(/\n/g, "<br>");  
+            .replace(/\n/g, "<br>"); 
 
         if (aiResponse) {
             setConversation(prev => [...prev, { role: "ai", text: formattedResponse, isHTML: true }]);
@@ -52,37 +62,64 @@ export default function Chat({ userId }) {
             <h2>💬 AI Learning Assistant</h2>
 
             <div className="mode-selector">
-                <label>Choose Course Mode: </label>
+                <label>Course Mode: </label>
                 <button 
-                    className={courseMode === "eciu" ? "selected" : ""}
-                    onClick={() => setCourseMode("eciu")}
-                >
-                    🎓 ECIU Courses Only
+                    className={`mode-button ${courseMode === "eciu" ? "active" : ""}`}
+                    onClick={() => setCourseMode("eciu")}>
+                    ECIU Courses <small>(default)</small>
                 </button>
                 <button 
-                    className={courseMode === "global" ? "selected" : ""}
-                    onClick={() => setCourseMode("global")}
-                >
-                    🌍 Global Courses
+                    className={`mode-button ${courseMode === "global" ? "active" : ""}`}
+                    onClick={() => setCourseMode("global")}>
+                    Global Courses
                 </button>
             </div>
 
-            <div className="chat-history">
-                {conversation.map((msg, index) => (
-                    msg.role === "courses" ? (
-                        <div key={index} className="course-recommendations">
-                            {msg.content}
-                        </div>
-                    ) : (
-                        <p key={index} className={msg.role === "user" ? "user-message" : "ai-message"}
-                            dangerouslySetInnerHTML={{ __html: msg.text }}>
-                        </p>
-                    )
-                ))}
+            <div className="chat-messages" ref={chatContainerRef}>
+                {conversation.map((msg, index) => {
+                    if (msg.role === "user") {
+                        return (
+                            <div key={index} className="user-message">
+                                <div className="message-bubble user">
+                                    <span className="user-label">You</span>
+                                    <p>{msg.text}</p>
+                                </div>
+                            </div>
+                        );
+                    } else if (msg.role === "ai") {
+                        return (
+                            <div key={index} className="ai-message">
+                                <div className="message-bubble ai">
+                                    <span className="ai-label">AI Assistant</span>
+                                    {msg.isHTML ? (
+                                        <p dangerouslySetInnerHTML={{ __html: msg.text }} />
+                                    ) : (
+                                        <p>{msg.text}</p>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    } else if (msg.role === "courses") {
+                        return (
+                            <div key={index} className="courses-container">
+                                {msg.content}
+                            </div>
+                        );
+                    }
+                    return null;
+                })}
             </div>
 
-            <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ask something..." />
-            <button onClick={askAI}>Ask</button>
+            <div className="chat-input">
+                <input 
+                    type="text" 
+                    value={question} 
+                    onChange={(e) => setQuestion(e.target.value)}
+                    placeholder="Ask something..."
+                    onKeyDown={(e) => e.key === 'Enter' && askAI()}
+                />
+                <button onClick={askAI}>Ask</button>
+            </div>
         </div>
     );
 }
